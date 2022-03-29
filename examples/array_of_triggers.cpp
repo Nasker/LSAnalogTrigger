@@ -15,9 +15,7 @@
 #define ANALOG_PIN_3 3
 #define ANALOG_PIN_4 4
 
-#define THRESHOLD_VALUE {1000,1000,1000,1000,1000}
-
-LSAnalogTrigger analogTrigger(TRIGGER_ID, ANALOG_PIN);
+const int thresholdValues[N_TRIGGERS] {1000,1000,1000,1000,1000};
 
 LSAnalogTrigger analogTriggers[N_TRIGGERS] =  {
   LSAnalogTrigger(ID_0, ANALOG_PIN_0),
@@ -37,7 +35,7 @@ void actOnTrigger(int ID, String callbackString){
 void setup() {
   Serial.begin(115200);
   for(int i=0; i<N_TRIGGERS; i++)
-    analogTriggers[i].setThreshold(THRESHOLD_VALUE[i]);
+    analogTriggers[i].setThreshold(thresholdValues[i]);
 }
 
 void loop() {
