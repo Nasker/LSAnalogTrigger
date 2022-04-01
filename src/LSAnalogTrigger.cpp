@@ -7,20 +7,11 @@
 #include "LSAnalogTrigger.h"
 
 
-LSAnalogTrigger::LSAnalogTrigger(int ID, int photoInput){
-	_ID = ID;
-	_photoInput = photoInput;
-  	_countGuard=0;
-  	_shootGuard=false;
-  	_coundGuardCycles=2000;
-}
-
 void LSAnalogTrigger::callibrate(int threshold){
-  digitalWrite(12,HIGH);
- _envMax=0;
-  _envMin=1023;
+  _envMax = 0;
+  _envMin = 1023;
  while (millis() < 4000) {
-    int sensorValue = analogRead(_photoInput);
+    int sensorValue = analogRead(_inputPin);
     if (sensorValue > _envMax) {
       _envMax = sensorValue;
     }
@@ -41,7 +32,7 @@ void LSAnalogTrigger::setCountGuard(int countGuardCycles){
 }
 
 void LSAnalogTrigger::readnShoot(void (*f)(int, String)){
-  _photoRead = smoother.smooth(analogRead(_photoInput));
+  _reading = smoother.smooth(analogRead(_inputPin));
   if(_shootGuard) _countGuard++;
 
   if(_countGuard >= _coundGuardCycles){
@@ -49,7 +40,7 @@ void LSAnalogTrigger::readnShoot(void (*f)(int, String)){
       _countGuard=0;
   }
  
-  if(_photoRead > _threshold){
+  if(_reading > _threshold){
       _state = true;  
     }
     else{
@@ -60,7 +51,7 @@ void LSAnalogTrigger::readnShoot(void (*f)(int, String)){
     if((_state)&&(!_shootGuard)){
       (*f)(_ID,"ON");
       _shootGuard=true;
-      _countGuard=0;
+      _countGuard=0; 
     }
     if(!_state){
       (*f)(_ID,"OFF");
@@ -70,7 +61,7 @@ void LSAnalogTrigger::readnShoot(void (*f)(int, String)){
 }
 
 void LSAnalogTrigger::printReading(){
-	Serial.print(_photoRead);
+	Serial.print(_reading);
 	Serial.print("\t");
 }
 
