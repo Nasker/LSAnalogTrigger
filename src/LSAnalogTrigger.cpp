@@ -57,6 +57,6 @@ void LSAnalogTrigger::printReading(){
 	Serial.print("\t");
 }
 
-bool LSAnalogTrigger::overThreshold(){
-	return _state;
+void LSAnalogTrigger::setThreshold(int threshold){
+  _threshold = threshold;
 }
