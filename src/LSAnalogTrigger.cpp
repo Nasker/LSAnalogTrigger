@@ -23,14 +23,6 @@ void LSAnalogTrigger::callibrate(int threshold){
   _threshold = threshold;
 }
 
-void LSAnalogTrigger::setThreshold(int threshold){
-	_threshold = threshold;
-}
-
-void LSAnalogTrigger::setCountGuard(int countGuardCycles){
-	_coundGuardCycles = countGuardCycles;
-}
-
 void LSAnalogTrigger::readnShoot(void (*f)(int, String)){
   _reading = smoother.smooth(analogRead(_inputPin));
   if(_shootGuard) _countGuard++;
