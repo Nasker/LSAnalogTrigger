@@ -15,7 +15,6 @@ LSTrigger::LSTrigger(int ID, int inputPin){
   	_coundGuardCycles=2000;
 }
 
-
 void LSTrigger::setCountGuard(int countGuardCycles){
 	_coundGuardCycles = countGuardCycles;
 }

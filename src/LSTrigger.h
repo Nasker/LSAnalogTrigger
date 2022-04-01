@@ -24,5 +24,5 @@ public:
     void setCountGuard(int countGuardCycles);
     virtual void readnShoot(void (*f)(int,String))=0;
     virtual void printReading()=0;
-    bool overThreshold();
+    bool overThreshold()
 };
