@@ -10,7 +10,9 @@
 
 class LSDigitalTrigger : public LSTrigger{
 public:
-    LSDigitalTrigger(int ID, int inputPin):LSTrigger(ID, inputPin){};
+    LSDigitalTrigger(int ID, int inputPin):LSTrigger(ID, inputPin){
+        pinMode(_inputPin, INPUT_PULLUP);
+    };
     void readnShoot(void (*f)(int,String));
     void printReading();
 };
