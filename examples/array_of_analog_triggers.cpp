@@ -39,7 +39,6 @@ void setup() {
 }
 
 void loop() {
-  for(LSAnalogTrigger trigger:analogTriggers){
+  for(LSAnalogTrigger trigger:analogTriggers)
     trigger.readnShoot(actOnTrigger);
-  }
 }
